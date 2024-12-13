@@ -18,40 +18,39 @@ with open('13/input.txt', 'r') as file:
                 yt = int(row[2].split('=')[-1])
                 input_data.append([yt, xt, deltayA, deltaxA, deltayB, deltaxB])
 
-@lru_cache(maxsize=None)
-def push_buttons_recursive(cost, ys, xs, yt, xt, deltayA, deltaxA, deltayB, deltaxB, depthA, depthB, max_depth):
-    if max_depth is not None:
-        if (depthA > max_depth or depthB > max_depth):
-            return False, None
+# @lru_cache(maxsize=None)
+# def push_buttons_recursive(cost, ys, xs, yt, xt, deltayA, deltaxA, deltayB, deltaxB, depthA, depthB, max_depth):
+#     if max_depth is not None:
+#         if (depthA > max_depth or depthB > max_depth):
+#             return False, None
 
-    # Found target
-    if ys == yt and xs == xt:
-        return True, cost
+#     # Found target
+#     if ys == yt and xs == xt:
+#         return True, cost
 
-    # Overshot
-    if ys > yt or xs > xt: return False, None
+#     # Overshot
+#     if ys > yt or xs > xt: return False, None
 
-    # Try A
-    valid_seq_A, downstream_cost_A = push_buttons_recursive(3, ys + deltayA, xs + deltaxA, yt, xt, deltayA, deltaxA, deltayB, deltaxB, depthA + 1, depthB, max_depth)
-    # Try B
-    valid_seq_B, downstream_cost_B = push_buttons_recursive(1, ys + deltayB, xs + deltaxB, yt, xt, deltayA, deltaxA, deltayB, deltaxB, depthA, depthB + 1, max_depth)
+#     # Try A
+#     valid_seq_A, downstream_cost_A = push_buttons_recursive(3, ys + deltayA, xs + deltaxA, yt, xt, deltayA, deltaxA, deltayB, deltaxB, depthA + 1, depthB, max_depth)
+#     # Try B
+#     valid_seq_B, downstream_cost_B = push_buttons_recursive(1, ys + deltayB, xs + deltaxB, yt, xt, deltayA, deltaxA, deltayB, deltaxB, depthA, depthB + 1, max_depth)
 
-    if valid_seq_A and valid_seq_B:
-        this_cost = min(downstream_cost_A, downstream_cost_B) + cost
-        return True, this_cost
-    elif valid_seq_A and not valid_seq_B:
-        this_cost = downstream_cost_A + cost
-        return True, this_cost
-    elif not valid_seq_A and valid_seq_B:
-        this_cost = downstream_cost_B + cost
-        return True, this_cost
-    else:
-        return False, None
+#     if valid_seq_A and valid_seq_B:
+#         this_cost = min(downstream_cost_A, downstream_cost_B) + cost
+#         return True, this_cost
+#     elif valid_seq_A and not valid_seq_B:
+#         this_cost = downstream_cost_A + cost
+#         return True, this_cost
+#     elif not valid_seq_A and valid_seq_B:
+#         this_cost = downstream_cost_B + cost
+#         return True, this_cost
+#     else:
+#         return False, None
 
-# input = input_data[0]
 # total_cost = 0
 # for input in input_data[:1]:
-#     valid_seq, cost = push_buttons(0, 0, 0, *input, 0, 0, max_depth=99)
+#     valid_seq, cost = push_buttons_recursive(0, 0, 0, *input, 0, 0, max_depth=99)
 #     if valid_seq:
 #         total_cost += cost
 
@@ -138,6 +137,7 @@ from math import gcd
 total_cost = 0
 counter = 0
 for input in input_data:
+    # comment these out for PART I
     input[0] += 10000000000000
     input[1] += 10000000000000
 
@@ -157,6 +157,5 @@ for input in input_data:
     if cost > -1:
         total_cost += cost
     counter += 1
-    print(counter)
 
 print(total_cost)
