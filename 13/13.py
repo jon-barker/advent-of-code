@@ -133,11 +133,35 @@ def linear_solve_button_mashing(yt, xt, deltayA, deltaxA, deltayB, deltaxB):
     return cost
 
 from math import gcd
+from copy import deepcopy
 
+# FINAL PART I
 total_cost = 0
 counter = 0
-for input in input_data:
-    # comment these out for PART I
+for input in deepcopy(input_data):
+    # We can divide all the x terms and y terms by any GCD
+    gcdx = gcd(gcd(input[0], input[2]), input[4]) 
+    input[0] /= gcdx
+    input[2] /= gcdx
+    input[4] /= gcdx
+    gcdy = gcd(gcd(input[1], input[3]), input[5]) 
+    input[1] /= gcdy
+    input[3] /= gcdy
+    input[5] /= gcdy
+
+    # cost = push_buttons_iterative(*input)
+    # cost = brute_force_optimize_button_mashing(*input)
+    cost = linear_solve_button_mashing(*input)
+    if cost > -1:
+        total_cost += cost
+    counter += 1
+
+print(total_cost)
+
+# FINAL PART II
+total_cost = 0
+counter = 0
+for input in deepcopy(input_data):
     input[0] += 10000000000000
     input[1] += 10000000000000
 
@@ -159,3 +183,4 @@ for input in input_data:
     counter += 1
 
 print(total_cost)
+
