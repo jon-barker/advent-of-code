@@ -38,7 +38,7 @@ def add_pos(a, b):
 import heapq
 
 def dijkstra(maze, start_pos, end_pos):
-    # Each state: (cost, (r, c, d))
+    # Each state: (cost, r, c)
     start_state = (0, start_pos[0], start_pos[1])
     visited = {}
     prev_nodes = {}  # state -> [list_of_predecessors]
