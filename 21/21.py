@@ -5,7 +5,7 @@ import csv
 
 # Open and read the file
 inputs = []
-with open('21/input.txt', 'r') as file:
+with open('21/test.txt', 'r') as file:
     reader = csv.reader(file) 
     for row in reader:
         inputs.append([r for r in row[0]])
