@@ -1,3 +1,4 @@
+from functools import lru_cache
 from itertools import product
 import csv
 import numpy as np
@@ -178,34 +179,21 @@ print(cheats_found)
 
 # PART II
 
-# cheats_found = 0
+positions = {val: i for i, val in enumerate(shortest_paths[0])}
+cost_limit = lowest_cost - 100
 
-# def manhattan(p1, p2):
-#     return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
+cheats_found = 0
+for i, (x, y) in enumerate(product(shortest_paths[0], repeat=2)):
+    if positions[x] > positions[y] or positions[x] + (lowest_cost - positions[y]) > cost_limit:
+        continue
+    d = sum(abs(a - b) for a, b in zip(x, y))
+    if d > 20:
+        continue
+    start_cost = positions[x]
+    end_cost = lowest_cost - positions[y]
+    if start_cost + d + end_cost <= cost_limit:
+        cheats_found += 1
+    if i % 1000 == 0:
+        print('cheats', i)
 
-# pairs = [(x, y) for x, y in product(shortest_paths[0], repeat=2) if (shortest_paths[0].index(x) < shortest_paths[0].index(y) and manhattan(x, y) <= 20)]
-
-# def add_unique(array, unique_list):
-#     if not any(np.array_equal(array, existing) for existing in unique_list):
-#         unique_list.append(array)
-
-# def is_array_in_list(array, unique_list):
-#     return any(np.array_equal(array, existing) for existing in unique_list)
-
-# cost_limit = lowest_cost - 50
-# seen = []
-# for i, p in enumerate(pairs):
-#     if i % 100 == 0:
-#         print(i, len(pairs))
-#     new_maze = np.copy(maze)
-#     minr, maxr = min(p[0][0], p[1][0]), max(p[0][0], p[1][0])
-#     minc, maxc = min(p[0][1], p[1][1]), max(p[0][1], p[1][1])
-#     new_maze[minr:maxr + 1, p[0][1]] = chars['.']
-#     new_maze[p[1][0], minc:maxc + 1] = chars['.']
-#     if not is_array_in_list(new_maze, seen):
-#         add_unique(new_maze, seen)
-#         lowest_cost, _ = dijkstra(new_maze, start, end)
-#         if lowest_cost <= cost_limit:
-#             cheats_found += 1
-
-# print(cheats_found)
+print(cheats_found)
