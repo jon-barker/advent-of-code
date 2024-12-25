@@ -1,1 +1,1 @@
-# advent_2024
+Here lay my solutions to Advent of Code.
