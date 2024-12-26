@@ -1,5 +1,5 @@
-input = 111221 # 312211 (test)
-# input = 1113222113 (real input)
+# input = 111221 # 312211 (test)
+input = 1113222113 # (real input)
 
 input = str(input)
 
@@ -16,7 +16,7 @@ def split_runs(input):
         split.append(seq)
     return split
 
-for _ in range(41):
+for _ in range(40):
     split = split_runs(input)
     input = ''
     for s in split:
