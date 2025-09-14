@@ -1,5 +1,5 @@
-#input = 'hepxcrrq' # Part I
-input = 'hepxxyzz' # Part II
+input = 'hepxcrrq' # Part I
+# input = 'hepxxyzz' # Part II
 
 valid_alphabet = 'abcdefghjkmnpqrstuvwxyz'
 valid_alphabet_ind = {c:i for (i, c) in enumerate(valid_alphabet)}
@@ -54,6 +54,6 @@ def increment_password(s_in):
 found_new = False
 while not found_new:
   input = increment_password(input)
-  print(input)
   if check_straight(input) and check_pairs(input):
     found_new = True
+print(input)
