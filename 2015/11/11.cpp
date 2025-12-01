@@ -2,8 +2,8 @@
 #include <string>
 #include <unordered_map>
 
-const std::string valid_alphabet ("abcdefghjkmnpqrstuvwxyz");
-const std::string invalid_starts ("ghijklmnoyz");
+const std::string &valid_alphabet ("abcdefghjkmnpqrstuvwxyz");
+const std::string &invalid_starts ("ghijklmnoyz");
 
 bool check_pairs(std::string& s_in) {
     char prev = s_in.at(0);
@@ -78,6 +78,6 @@ int main() {
             found_new = true;
         }
     }
-    std::cout << input;
+    std::cout << input << std::endl;
 
 }

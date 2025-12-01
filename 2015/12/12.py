@@ -1,3 +1,5 @@
+# PART I
+
 with open("input.txt", "r") as f:
     input = f.read()
 
@@ -14,3 +16,5 @@ for i, c in enumerate(input):
 
 num_list = [int(p) for p in parsed.split(" ")[1:]]
 print(sum(num_list))
+
+# PART II
