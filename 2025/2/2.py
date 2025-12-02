@@ -24,7 +24,7 @@ print(S)
 def has_repeat_2(n):
     l = len(str(n))
     # iterate over possible chunk sizes
-    for i in range(1,(l//2) + 1):
+    for i in range((l//2), 0, -1):
         # check the number of digits has no residual mod chunk size
         if l % i == 0:
             # split the number into chunks
