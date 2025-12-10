@@ -8,37 +8,37 @@ with open("input.txt", "r") as f:
 data = [d.strip('\n').split(' ') for d in data]
 
 # PART I 
-# total = 0
-# for i, d in enumerate(data):
-#     # get target vector
-#     target = d[0][1:-1]
-#     target = [1 if c == '#' else 0 for c in target]
-#     target = np.array(target)
-#     # get switches
-#     switches = []
-#     for s in d[1:-1]:
-#         switch = np.zeros((target.shape[0]))
-#         for t in s[1:-1].split(','):
-#             switch[int(t)] = 1
-#         switches.append(switch)
-#     switches = np.array(switches)
-#     found = False
-#     length = 1
-#     while not found:
-#         for chosen in itertools.product(list(range(switches.shape[0])), repeat=length):
-#             mult = np.zeros((switches.shape[0]))
-#             for c in chosen:
-#                 mult[c] = 1
-#             out = np.matmul(mult, switches)
-#             out = out % 2
-#             if (out == target).all():
-#                 found = True
-#                 total += length
-#                 break
-#         length += 1
-#     print(f"{i} of {len(data)}")
+total = 0
+for i, d in enumerate(data):
+    # get target vector
+    target = d[0][1:-1]
+    target = [1 if c == '#' else 0 for c in target]
+    target = np.array(target)
+    # get switches
+    switches = []
+    for s in d[1:-1]:
+        switch = np.zeros((target.shape[0]))
+        for t in s[1:-1].split(','):
+            switch[int(t)] = 1
+        switches.append(switch)
+    switches = np.array(switches)
+    found = False
+    length = 1
+    while not found:
+        for chosen in itertools.product(list(range(switches.shape[0])), repeat=length):
+            mult = np.zeros((switches.shape[0]))
+            for c in chosen:
+                mult[c] = 1
+            out = np.matmul(mult, switches)
+            out = out % 2
+            if (out == target).all():
+                found = True
+                total += length
+                break
+        length += 1
+    print(f"{i} of {len(data)}")
 
-# print(total)
+print(total)
 
 # PART II 
 total = 0
